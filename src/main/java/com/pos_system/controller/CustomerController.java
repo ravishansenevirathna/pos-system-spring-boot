@@ -15,7 +15,7 @@ public class CustomerController {
 
     @PostMapping("/login")
     public String saveCustomer(@RequestBody CustomerDto customerDto) {
-        System.out.println(" cccccccccc"+ customerDto.getCustomerName());
+        customerService.saveCustomer(customerDto);
 
         return "Customer logged in successfully";
     }
