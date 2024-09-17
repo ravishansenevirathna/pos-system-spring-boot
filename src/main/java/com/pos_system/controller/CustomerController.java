@@ -15,7 +15,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping("/login")
+    @PostMapping("/saveCustomer")
     public String saveCustomer(@RequestBody CustomerDto customerDto) {
         customerService.saveCustomer(customerDto);
 
@@ -32,6 +32,13 @@ public class CustomerController {
     public List<CustomerDto> getAllCustomer() {
         List<CustomerDto> allCustomer = customerService.getAllCustomer();
         return allCustomer;
+
+    }
+
+    @DeleteMapping(path = "/deleteCustomer/{id}")
+    public String deleteCustomer(@PathVariable(value = "id") int customerId) {
+
+        return customerService.deleteCustomer(customerId);
 
     }
 }

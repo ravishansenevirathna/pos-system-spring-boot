@@ -55,4 +55,10 @@ public class CustomerServiceImpl implements CustomerService {
 
         return customerDtoList;
     }
+
+    @Override
+    public String deleteCustomer(int customerId) {
+
+        return "";
+    }
 }
