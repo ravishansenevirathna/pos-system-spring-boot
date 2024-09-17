@@ -2,6 +2,8 @@ package com.pos_system.service;
 
 import com.pos_system.dto.CustomerDto;
 
+import java.util.List;
+
 /**
  * Hi 👋, I'm ravishansenevirathna
  * Project : pos-system
@@ -10,4 +12,8 @@ import com.pos_system.dto.CustomerDto;
  */
 public interface CustomerService {
     void saveCustomer(CustomerDto customerDto);
+
+    CustomerDto getCustomerById(int customerId);
+
+    List<CustomerDto> getAllCustomer();
 }
