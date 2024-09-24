@@ -2,6 +2,7 @@ package com.pos_system.service.impl;
 
 import com.pos_system.dto.CustomerDto;
 import com.pos_system.entity.Customer;
+import com.pos_system.exception.NotFoundException;
 import com.pos_system.repo.CustomerRepo;
 import com.pos_system.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> getAllCustomer() {
+
+
         List<Customer> allCustomer =  customerRepo.findAll();
+        if (allCustomer.size() > 0) {
         List<CustomerDto> customerDtoList = new ArrayList<>();
         for (Customer customer : allCustomer){
 
@@ -54,7 +58,14 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return customerDtoList;
+        }else{
+            throw new NotFoundException("customer not found");
+        }
     }
+
+
+
+
 
     @Override
     public String deleteCustomer(int customerId) {
