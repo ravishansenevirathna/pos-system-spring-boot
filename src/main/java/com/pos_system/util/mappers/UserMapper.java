@@ -4,9 +4,14 @@ import com.pos_system.dto.UserDto;
 import com.pos_system.entity.User;
 import org.mapstruct.Mapper;
 
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
     User dtoToEntity (UserDto userDto);
+
+//    List<UserDto> entityToDtoList(List<User> users);
+
+//    List<UserDto> entityToDtoList(List<User> users);
 
 }

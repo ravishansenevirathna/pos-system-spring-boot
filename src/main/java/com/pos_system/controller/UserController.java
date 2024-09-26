@@ -1,6 +1,5 @@
 package com.pos_system.controller;
 
-import com.pos_system.dto.CustomerDto;
 import com.pos_system.dto.UserDto;
 import com.pos_system.response.StandardResponse;
 import com.pos_system.service.UserService;
@@ -9,18 +8,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping("/saveUser")
     public ResponseEntity<StandardResponse> saveUser(@RequestBody UserDto userDto) {
-        userService.saveUser(userDto);
+        String result = userService.saveUser(userDto);
 
-        return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success","saved!" ), HttpStatus.OK);
+        return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success", result), HttpStatus.OK);
     }
+
+//    @GetMapping(value = "/getAllByStatus", params = {"active_status"})
+//    public ResponseEntity<StandardResponse> getAllByStatus(@RequestParam(value = "active_status") String active_status) {
+//        List<UserDto> userDto = userService.getAllByStatus(active_status);
+//        return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success", userDto), HttpStatus.OK);
+//    }
+
+
 }
