@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "customer")
 @Data
@@ -28,4 +30,9 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
+    @OneToMany(mappedBy ="customer")
+    private Set<Order> orders;
+
+    public Customer(int id, String customerName, String nic, String phoneNumber, String address) {
+    }
 }

@@ -1,6 +1,7 @@
 package com.pos_system.controller;
 
 import com.pos_system.dto.UserDto;
+import com.pos_system.dto.paginated.PaginatedResponseUserDto;
 import com.pos_system.response.StandardResponse;
 import com.pos_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,14 @@ public class UserController {
         return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success", result), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getAllByStatus", params = {"active_status"})
-    public ResponseEntity<StandardResponse> getAllByStatus(@RequestParam(value = "active_status") Boolean active_status) {
-        List<UserDto> userDto = userService.getAllByStatus(active_status);
-        return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success", userDto), HttpStatus.OK);
+    @GetMapping(value = "/getAllByStatus", params = {"active_status", "page", "size"})
+    public ResponseEntity<StandardResponse> getAllByStatus(@RequestParam(value = "active_status") Boolean active_status,
+                                                           @RequestParam(value = "page") int page,
+                                                           @RequestParam(value = "size") int size) {
+//        List<UserDto> userDto = userService.getAllByStatus(active_status, page, size);
+        PaginatedResponseUserDto paginatedResponseUserDto = userService.getAllByStatusWithPaginated(active_status, page, size);
+
+        return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success", paginatedResponseUserDto), HttpStatus.OK);
     }
 
 
