@@ -32,6 +32,6 @@ public class User {
     private UserType userType;
 
     @Column(name = "active_status")
-    private boolean active_status;
+    private Boolean activeStatus;
 
 }

@@ -8,6 +8,8 @@ import com.pos_system.util.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,21 +32,17 @@ public class UserServiceImpl implements UserService {
         return "User saved";
     }
 
-//    @Override
-//    public List<UserDto> getAllByStatus(String activeStatus) {
-//        return List.of();
-//    }
 
-//    @Override
-//    public List<UserDto> getAllByStatus(String activeStatus) {
-//        List<User> users = userRepo.findAllByActive_status(activeStatus);
-//        if(!users.isEmpty()){
-//            List<UserDto> userDtoList = userMapper.entityToDtoList(users);
-//
-//            return userDtoList;
-//        }else return null;
-//
-//    }
+    @Override
+    public List<UserDto> getAllByStatus(Boolean activeStatus) {
+        List<User> users = userRepo.findAllByActiveStatus(activeStatus);
+        if(!users.isEmpty()){
+            List<UserDto> userDtoList = userMapper.entityToDtoList(users);
+
+            return userDtoList;
+        }else return null;
+
+    }
 
 
 }
