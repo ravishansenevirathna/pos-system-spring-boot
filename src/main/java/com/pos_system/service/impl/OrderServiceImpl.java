@@ -1,8 +1,10 @@
 package com.pos_system.service.impl;
 
 import com.pos_system.dto.request.RequestOrderSaveDto;
+import com.pos_system.entity.Customer;
 import com.pos_system.entity.Order;
 import com.pos_system.entity.OrderDetails;
+import com.pos_system.repo.CustomerRepo;
 import com.pos_system.repo.ItemRepo;
 import com.pos_system.repo.OrderDetailsRepo;
 import com.pos_system.repo.OrderRepo;
@@ -30,17 +32,22 @@ public class OrderServiceImpl implements OrderService {
     private ItemRepo itemRepo;
 
     @Autowired
+    private CustomerRepo customerRepo;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
     @Transactional
     public String saveOrder(RequestOrderSaveDto requestOrderSaveDto) {
+        System.out.println("gf"+requestOrderSaveDto);
 
-        Order order = new Order(
-                requestOrderSaveDto.getCustomer(),
-                requestOrderSaveDto.getDate(),
-                requestOrderSaveDto.getTotal()
-        );
+        // Fetch the Customer entity using the customer ID from RequestOrderSaveDto
+        Customer customer = customerRepo.findById(requestOrderSaveDto.getCustomer())
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        Order order = modelMapper.map(requestOrderSaveDto,Order.class);
+        order.setCustomer(customer);
 
         orderRepo.save(order);
 

@@ -16,18 +16,18 @@ import java.util.Set;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "itemId")
     private int itemId;
 
-    @Column(name = "itemName", nullable = false)
+    @Column(name = "itemName")
     private String itemName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "measureType",nullable = false)
+    @Column(name = "measureType")
     private MeasuringUnitType measuringUnitType;
 
-    @Column(name = "sellingPrice", nullable = false)
+    @Column(name = "sellingPrice")
     private Double sellingPrice;
 
     @OneToMany(mappedBy = "items")

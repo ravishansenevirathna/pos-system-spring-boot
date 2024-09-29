@@ -16,17 +16,17 @@ import java.util.Set;
 public class Order {
     @Id
     @Column(name = "order_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int order_id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id",nullable = false)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column(name = "order_date",columnDefinition = "DATETIME")
     private Date date;
 
-    @Column(name = "total",nullable = false)
+    @Column(name = "total")
     private Double total;
 
     @OneToMany(mappedBy = "orders")

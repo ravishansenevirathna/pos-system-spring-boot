@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class OrderDetails {
     @Id
     @Column(name = "order_details_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderDetailsId;
 
     @Column(name = "item_name")
@@ -22,15 +22,15 @@ public class OrderDetails {
     @Column(name = "qty")
     private Double qty;
 
-    @Column(name = "amount",nullable = false)
+    @Column(name = "amount")
     private Double amount;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id")
     private Order orders;
 
     @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id")
     private Item items;
 
 
