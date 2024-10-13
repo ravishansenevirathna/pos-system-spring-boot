@@ -31,8 +31,4 @@ public class Order {
 
     @OneToMany(mappedBy = "orders")
     private Set<OrderDetails> orderDetails;
-
-
-    public Order(int customer, Date date, Double total) {
-    }
 }

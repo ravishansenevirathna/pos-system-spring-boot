@@ -1,6 +1,9 @@
 package com.pos_system.service.impl;
 
+import com.pos_system.dto.paginated.PaginatedResponseOrderDetailsDto;
+import com.pos_system.dto.queryInterface.OrderDetailsInterface;
 import com.pos_system.dto.request.RequestOrderSaveDto;
+import com.pos_system.dto.response.ResponseOrderDetailsDto;
 import com.pos_system.entity.Customer;
 import com.pos_system.entity.Order;
 import com.pos_system.entity.OrderDetails;
@@ -14,8 +17,10 @@ import org.aspectj.weaver.ast.Or;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -68,5 +73,29 @@ public class OrderServiceImpl implements OrderService {
 
         }
         return "Failed to save order";
+    }
+
+    @Override
+    public PaginatedResponseOrderDetailsDto getOrderDetails(String itemName, int page, int size) {
+
+        int total = 1000;
+        List<OrderDetailsInterface> orderDetailsInterfaces = orderRepo.getOrdersByTotal(total, PageRequest.of(page, size));
+
+        List<ResponseOrderDetailsDto> responseOrderDetailsDtos = new ArrayList<>();
+        for(OrderDetailsInterface orderDetailsInterface: orderDetailsInterfaces){
+            ResponseOrderDetailsDto responseOrderDetailsDto=new ResponseOrderDetailsDto(
+                    orderDetailsInterface.getCustomerName(),
+                    orderDetailsInterface.getPhoneNumber(),
+                    orderDetailsInterface.getAddress(),
+                    orderDetailsInterface.getDate(),
+                    orderDetailsInterface.getTotal()
+            );
+            responseOrderDetailsDtos.add(responseOrderDetailsDto);
+        }
+        PaginatedResponseOrderDetailsDto paginatedResponseOrderDetailsDto = new PaginatedResponseOrderDetailsDto(
+                responseOrderDetailsDtos,
+                orderRepo.countAllByTotal(total)
+                );
+        return paginatedResponseOrderDetailsDto;
     }
 }

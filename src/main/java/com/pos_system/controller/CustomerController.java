@@ -20,6 +20,7 @@ public class CustomerController {
 
     @PostMapping("/saveCustomer")
     public ResponseEntity<StandardResponse> saveCustomer(@RequestBody CustomerDto customerDto) {
+        System.out.println(" ========="+customerDto);
         customerService.saveCustomer(customerDto);
 
         return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success","saved!" ), HttpStatus.OK);

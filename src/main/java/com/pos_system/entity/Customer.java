@@ -35,4 +35,7 @@ public class Customer {
 
     public Customer(int id, String customerName, String nic, String phoneNumber, String address) {
     }
+
+    public Customer(String customerName, String nic, String phoneNumber, String address) {
+    }
 }

@@ -2,9 +2,11 @@ package com.pos_system.service.impl;
 
 import com.pos_system.dto.CustomerDto;
 import com.pos_system.entity.Customer;
+import com.pos_system.entity.Item;
 import com.pos_system.exception.NotFoundException;
 import com.pos_system.repo.CustomerRepo;
 import com.pos_system.service.CustomerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +26,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
 
     @Override
     public void saveCustomer(CustomerDto customerDto) {
         System.out.println("Saving customer");
-
-        Customer customer = new Customer(customerDto.getId(), customerDto.getCustomerName(), customerDto.getNic(),customerDto.getPhoneNumber(), customerDto.getAddress());
+        Customer customer = modelMapper.map(customerDto,Customer.class);
+//        Customer customer = new Customer(customerDto.getCustomerName(), customerDto.getNic(),customerDto.getPhoneNumber(), customerDto.getAddress());
+        System.out.println(" =============="+customer);
         customerRepo.save(customer);
     }
 
