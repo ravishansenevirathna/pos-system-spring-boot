@@ -35,9 +35,7 @@ public class ItemServiceImpl implements ItemService {
         public String saveItem(ItemDto itemDto) {
 
 //        using moddel mapper
-        System.out.println("zzzzzzzzzzzzzz"+itemDto);
         Item item = modelMapper.map(itemDto,Item.class);
-        System.out.println("vvvvvvvvvvvvvvv"+item);
 
         if(!itemRepo.existsById(item.getItemId())){
             itemRepo.save(item);
