@@ -45,7 +45,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public String saveOrder(RequestOrderSaveDto requestOrderSaveDto) {
-        System.out.println("gf"+requestOrderSaveDto);
 
         // Fetch the Customer entity using the customer ID from RequestOrderSaveDto
         Customer customer = customerRepo.findById(requestOrderSaveDto.getCustomer())
