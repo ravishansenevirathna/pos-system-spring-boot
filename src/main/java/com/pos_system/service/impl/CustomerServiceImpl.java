@@ -32,10 +32,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomer(CustomerDto customerDto) {
-        System.out.println("Saving customer");
         Customer customer = modelMapper.map(customerDto,Customer.class);
 //        Customer customer = new Customer(customerDto.getCustomerName(), customerDto.getNic(),customerDto.getPhoneNumber(), customerDto.getAddress());
-        System.out.println(" =============="+customer);
         customerRepo.save(customer);
     }
 
