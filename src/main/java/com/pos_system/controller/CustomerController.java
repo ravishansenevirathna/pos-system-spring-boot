@@ -24,8 +24,6 @@ public class CustomerController {
         return new ResponseEntity<>(new StandardResponse(HttpStatus.OK.value(), "Success", "Success","saved!" ), HttpStatus.OK);
     }
 
-
-
     @GetMapping(path = "/find" , params = "id")
     public CustomerDto getCustomerById(@RequestParam(value = "id") int customerId) {
         CustomerDto customerDto = customerService.getCustomerById(customerId);
